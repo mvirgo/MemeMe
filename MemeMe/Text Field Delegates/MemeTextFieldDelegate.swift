@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
+    // Set attributes of text
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth: 3.0
+    ]
+    
     // Clear text field if only default text included
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
@@ -17,6 +25,7 @@ class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
         }
     }
     
+    // Exit text field when returned
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -28,10 +28,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         topTextField.text = "TOP"
         topTextField.textAlignment = .center
         topTextField.delegate = memeTextDelegate
+        topTextField.defaultTextAttributes = memeTextDelegate.memeTextAttributes
         bottomTextField.text = "BOTTOM"
         bottomTextField.textAlignment = .center
         bottomTextField.delegate = memeTextDelegate
-        
+        bottomTextField.defaultTextAttributes = memeTextDelegate.memeTextAttributes
     }
     
     // MARK: UIImagePicker Delegate functions
