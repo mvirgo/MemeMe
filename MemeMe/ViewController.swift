@@ -13,11 +13,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // MARK: Outlets
     @IBOutlet weak var imagePickerView: UIImageView!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     // MARK: View functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
     // MARK: UIImagePicker Delegate functions
@@ -35,9 +36,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     // MARK: Actions
-    @IBAction func pickAnImage(_ sender: Any) {
+    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        pickerController.sourceType = .photoLibrary
+        present(pickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.sourceType = .camera
         present(pickerController, animated: true, completion: nil)
     }
     
