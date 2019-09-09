@@ -37,14 +37,30 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2xZ-dF-han">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpc-Oa-0z5">
+                                <rect key="frame" x="163" y="84" width="49" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1p-ec-kcx">
+                                <rect key="frame" x="147" y="573" width="81" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="42H-15-Xxw"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="FAB-PJ-Amj"/>
+                            <constraint firstItem="kpc-Oa-0z5" firstAttribute="top" secondItem="2xZ-dF-han" secondAttribute="top" constant="20" id="SVM-pX-5Y6"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UYB-mF-lco"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YfK-mx-Zbi"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cWE-uK-6Ad"/>
+                            <constraint firstItem="g1p-ec-kcx" firstAttribute="centerX" secondItem="2xZ-dF-han" secondAttribute="centerX" id="d1m-gt-x17"/>
+                            <constraint firstItem="kpc-Oa-0z5" firstAttribute="centerX" secondItem="2xZ-dF-han" secondAttribute="centerX" id="guf-re-xcM"/>
+                            <constraint firstItem="2xZ-dF-han" firstAttribute="bottom" secondItem="g1p-ec-kcx" secondAttribute="bottom" constant="20" id="iE1-gr-XiK"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mEW-GK-l1y"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="top" secondItem="2xZ-dF-han" secondAttribute="bottom" id="mmh-ch-036"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="or7-OG-ffF"/>
@@ -56,8 +72,10 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="YSH-bj-RC7"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomTextField" destination="g1p-ec-kcx" id="QAC-Xo-PH9"/>
                         <outlet property="cameraButton" destination="As4-dK-jxv" id="F3e-Bt-9s9"/>
                         <outlet property="imagePickerView" destination="2xZ-dF-han" id="YlN-i8-Jay"/>
+                        <outlet property="topTextField" destination="kpc-Oa-0z5" id="xTp-Hr-CHQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

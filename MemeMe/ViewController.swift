@@ -14,11 +14,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Outlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
+    
+    // MARK: Text Field Delegate objects
+    let memeTextDelegate = MemeTextFieldDelegate()
     
     // MARK: View functions
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        // Set up initial text fields
+        topTextField.text = "TOP"
+        topTextField.textAlignment = .center
+        topTextField.delegate = memeTextDelegate
+        bottomTextField.text = "BOTTOM"
+        bottomTextField.textAlignment = .center
+        bottomTextField.delegate = memeTextDelegate
+        
     }
     
     // MARK: UIImagePicker Delegate functions
