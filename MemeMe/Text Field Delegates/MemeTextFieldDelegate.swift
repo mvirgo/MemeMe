@@ -15,7 +15,7 @@ class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth: 3.0
+        NSAttributedString.Key.strokeWidth: -3.0
     ]
     
     // Clear text field if only default text included
