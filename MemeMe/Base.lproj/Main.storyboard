@@ -72,9 +72,11 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="YSH-bj-RC7"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomTextConstraint" destination="iE1-gr-XiK" id="LxM-BM-BxW"/>
                         <outlet property="bottomTextField" destination="g1p-ec-kcx" id="QAC-Xo-PH9"/>
                         <outlet property="cameraButton" destination="As4-dK-jxv" id="F3e-Bt-9s9"/>
                         <outlet property="imagePickerView" destination="2xZ-dF-han" id="YlN-i8-Jay"/>
+                        <outlet property="topTextConstraint" destination="SVM-pX-5Y6" id="19S-m4-QhZ"/>
                         <outlet property="topTextField" destination="kpc-Oa-0z5" id="xTp-Hr-CHQ"/>
                     </connections>
                 </viewController>
