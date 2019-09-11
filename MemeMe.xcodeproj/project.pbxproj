@@ -13,6 +13,7 @@
 		7A0454922325AB8C00EEA2EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A0454912325AB8C00EEA2EC /* Assets.xcassets */; };
 		7A0454952325AB8C00EEA2EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A0454932325AB8C00EEA2EC /* LaunchScreen.storyboard */; };
 		7A3213BD232701840093A81C /* MemeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3213BC232701840093A81C /* MemeTextFieldDelegate.swift */; };
+		7A8EF1CD23289EB70047FC0D /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8EF1CC23289EB70047FC0D /* Icon-60@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7A0454942325AB8C00EEA2EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A0454962325AB8C00EEA2EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A3213BC232701840093A81C /* MemeTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextFieldDelegate.swift; sourceTree = "<group>"; };
+		7A8EF1CC23289EB70047FC0D /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7A0454912325AB8C00EEA2EC /* Assets.xcassets */,
 				7A0454932325AB8C00EEA2EC /* LaunchScreen.storyboard */,
 				7A0454962325AB8C00EEA2EC /* Info.plist */,
+				7A8EF1CC23289EB70047FC0D /* Icon-60@2x.png */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 				7A0454952325AB8C00EEA2EC /* LaunchScreen.storyboard in Resources */,
 				7A0454922325AB8C00EEA2EC /* Assets.xcassets in Resources */,
 				7A0454902325AB8B00EEA2EC /* Main.storyboard in Resources */,
+				7A8EF1CD23289EB70047FC0D /* Icon-60@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
