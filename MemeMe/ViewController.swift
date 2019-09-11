@@ -11,6 +11,10 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
                       UINavigationControllerDelegate {
 
+    // MARK: Constants
+    let textPositionScale: CGFloat = 0.9
+    let keyboardViewPositionScale: CGFloat = 0.9
+    
     // MARK: Outlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -18,6 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomTextConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomToolbar: UIToolbar!
     
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -79,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         let imageHeight = imagePickerView.intrinsicContentSize.height
         let imageWidth = imagePickerView.intrinsicContentSize.width
         var scale: CGFloat = 0.0
+        // Calculate image scale based on device orientation
         if UIDevice.current.orientation.isPortrait {
             scale = imageViewWidth / imageWidth
         } else {
@@ -86,12 +92,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         let middle = imageViewHeight / 2
         // Move the meme text onto the image
-        topTextConstraint.constant = middle - (scale * (imageHeight / 2))
-        bottomTextConstraint.constant = middle - (scale * (imageHeight / 2))
+        // Multiply by textPositionScale to move slightly into image
+        topTextConstraint.constant =
+            middle - (scale * (imageHeight / 2) * textPositionScale)
+        bottomTextConstraint.constant =
+            middle - (scale * (imageHeight / 2) * textPositionScale)
     }
     
     // MARK: Keyboard functions to avoid overlaying onto text
-    // Keyboard functions are from Udacity classroom
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(
             self, selector: #selector(keyboardWillShow(_:)),
@@ -109,11 +117,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
+        // Set frame back to normal
         view.frame.origin.y = 0
+        // Make sure bottom toolbar is shown
+        bottomToolbar.isHidden = false
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        // Hide the bottom toolbar from view
+        bottomToolbar.isHidden = true
+        // If editing bottom text, move up view by percent of keyboard height
+        // keyboardViewPositionScale used as small screens might push above
+        //   safe space otherwise
+        if bottomTextField.isEditing {
+            view.frame.origin.y =
+                -getKeyboardHeight(notification) * keyboardViewPositionScale
+        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
