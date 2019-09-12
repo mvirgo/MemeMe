@@ -221,6 +221,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func shareOrSaveMeme(_ sender: Any) {
         let meme = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
+        // Handle iPads
+        if let popup = controller.popoverPresentationController {
+            popup.barButtonItem = activityButton
+        }
         present(controller, animated: true, completion: nil)
     }
     
