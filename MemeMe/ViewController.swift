@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var topTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomToolbar: UIToolbar!
+    @IBOutlet weak var activityButton: UIBarButtonItem!
     
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -35,7 +36,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Enable camera button only if there is a camera available
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        // Disable the activity button until an image is selected
+        activityButton.isEnabled = false
         // Set up initial text fields
         topTextField.text = "TOP"
         topTextField.textAlignment = .center
@@ -68,6 +72,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
             imagePickerView.image = image
             // Set the image text
             setImageText(image)
+            // Enable the activity button for sharing/saving
+            activityButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -140,6 +146,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
+    
+    // MARK: Functions to store memes
+    func generateMemedImage() -> UIImage {
+        // TODO: Hide toolbar and navbar
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        // TODO: Show toolbar and navbar
+        
+        return memedImage
+    }
+    
+    func save() {
+        // Create meme
+        let memedImage = generateMemedImage()
+        // Save image
+        UIImageWriteToSavedPhotosAlbum(memedImage, self, nil, nil)
+    }
 
     // MARK: Actions
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
@@ -156,5 +184,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         present(pickerController, animated: true, completion: nil)
     }
     
+    @IBAction func shareOrSaveMeme(_ sender: Any) {
+        let meme = generateMemedImage()
+        let controller = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
+    }
 }
 
