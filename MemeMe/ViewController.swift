@@ -28,6 +28,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: Meme struct to hold information
     struct Meme {
+        var topText: String = ""
+        var bottomText: String = ""
+        var originalImage: UIImage?
+        var memedImage: UIImage?
         var imageHeight: CGFloat = 0.0
         var imageWidth: CGFloat = 0.0
         var scale: CGFloat = 0.0
@@ -197,10 +201,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func save() {
-        // Create meme
-        let memedImage = generateMemedImage()
-        // Save image
-        UIImageWriteToSavedPhotosAlbum(memedImage, self, nil, nil)
+        // Store meme information
+        meme.topText = topTextField.text!
+        meme.bottomText = bottomTextField.text!
+        meme.originalImage = imagePickerView.image!
     }
 
     // MARK: Actions
@@ -219,13 +223,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func shareOrSaveMeme(_ sender: Any) {
-        let meme = generateMemedImage()
-        let controller = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
+        let memedImage = generateMemedImage()
+        let controller = UIActivityViewController(activityItems: [memedImage],
+                                                  applicationActivities: nil)
         // Handle iPads
         if let popup = controller.popoverPresentationController {
             popup.barButtonItem = activityButton
         }
+        // Present the activity view
         present(controller, animated: true, completion: nil)
+        // Save the image if selected
+        controller.completionWithItemsHandler = {(activity, success, items, error) in
+            if success {
+                self.meme.memedImage = memedImage
+                self.save()
+            }
+        }
     }
     
     @IBAction func cancelMeme(_ sender: Any) {
