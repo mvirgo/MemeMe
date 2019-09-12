@@ -36,7 +36,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISt-4y-goY">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Pick" id="xhf-z4-qMI">
+                                    <barButtonItem title="Select Image" id="xhf-z4-qMI">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="uFq-m7-caJ"/>
                                         </connections>
