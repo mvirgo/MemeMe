@@ -24,6 +24,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var bottomTextConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var activityButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -38,8 +39,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         // Enable camera button only if there is a camera available
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        // Disable the activity button until an image is selected
+        // Disable the activity & cancel buttons until an image is selected
         activityButton.isEnabled = false
+        cancelButton.isEnabled = false
         // Set up initial text fields
         topTextField.text = "TOP"
         topTextField.textAlignment = .center
@@ -73,7 +75,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
             // Set the image text
             setImageText(image)
             // Enable the activity button for sharing/saving
+            //   as well as the cancel button
             activityButton.isEnabled = true
+            cancelButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -188,6 +192,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         let meme = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
         present(controller, animated: true, completion: nil)
+    }
+    @IBAction func cancelMeme(_ sender: Any) {
+        // Set back to initial view
+        imagePickerView.image = nil
+        viewDidLoad()
     }
 }
 

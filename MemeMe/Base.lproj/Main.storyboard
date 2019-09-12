@@ -73,7 +73,11 @@
                                 <action selector="shareOrSaveMeme:" destination="BYZ-38-t0r" id="3dr-OW-vHk"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="YSH-bj-RC7"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="YSH-bj-RC7">
+                            <connections>
+                                <action selector="cancelMeme:" destination="BYZ-38-t0r" id="IaH-Md-I21"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityButton" destination="yJa-H6-1M7" id="cxX-p2-cZe"/>
@@ -81,6 +85,7 @@
                         <outlet property="bottomTextField" destination="g1p-ec-kcx" id="QAC-Xo-PH9"/>
                         <outlet property="bottomToolbar" destination="ISt-4y-goY" id="qtf-Ro-gnG"/>
                         <outlet property="cameraButton" destination="As4-dK-jxv" id="F3e-Bt-9s9"/>
+                        <outlet property="cancelButton" destination="YSH-bj-RC7" id="Y7A-Sj-dOR"/>
                         <outlet property="imagePickerView" destination="2xZ-dF-han" id="YlN-i8-Jay"/>
                         <outlet property="topTextConstraint" destination="SVM-pX-5Y6" id="19S-m4-QhZ"/>
                         <outlet property="topTextField" destination="kpc-Oa-0z5" id="xTp-Hr-CHQ"/>
