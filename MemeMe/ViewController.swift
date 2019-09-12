@@ -26,6 +26,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var activityButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    // MARK: Meme struct to hold information
+    struct Meme {
+        var imageHeight: CGFloat = 0.0
+        var imageWidth: CGFloat = 0.0
+        var scale: CGFloat = 0.0
+    }
+    var meme = Meme()
+    
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
     
@@ -91,22 +99,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         // Get the image dimensions and scale
         let imageViewHeight = imagePickerView.bounds.height
         let imageViewWidth = imagePickerView.bounds.width
-        let imageHeight = imagePickerView.intrinsicContentSize.height
-        let imageWidth = imagePickerView.intrinsicContentSize.width
-        var scale: CGFloat = 0.0
+        meme.imageHeight = imagePickerView.intrinsicContentSize.height
+        meme.imageWidth = imagePickerView.intrinsicContentSize.width
         // Calculate image scale based on device orientation
         if UIDevice.current.orientation.isPortrait {
-            scale = imageViewWidth / imageWidth
+            meme.scale = imageViewWidth / meme.imageWidth
         } else {
-            scale = imageViewHeight / imageHeight
+            meme.scale = imageViewHeight / meme.imageHeight
         }
         let middle = imageViewHeight / 2
         // Move the meme text onto the image
         // Multiply by textPositionScale to move slightly into image
         topTextConstraint.constant =
-            middle - (scale * (imageHeight / 2) * textPositionScale)
+            middle - (meme.scale * (meme.imageHeight / 2) * textPositionScale)
         bottomTextConstraint.constant =
-            middle - (scale * (imageHeight / 2) * textPositionScale)
+            middle - (meme.scale * (meme.imageHeight / 2) * textPositionScale)
     }
     
     // MARK: Keyboard functions to avoid overlaying onto text
@@ -131,11 +138,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         view.frame.origin.y = 0
         // Make sure bottom toolbar is shown
         bottomToolbar.isHidden = false
+        // Re-enable sharing button
+        activityButton.isEnabled = true
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
         // Hide the bottom toolbar from view
         bottomToolbar.isHidden = true
+        // Disable sharing so cursor isn't accidentally visible when shared/saved
+        activityButton.isEnabled = false
         // If editing bottom text, move up view by percent of keyboard height
         // keyboardViewPositionScale used as small screens might push above
         //   safe space otherwise
@@ -153,15 +164,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: Functions to store memes
     func generateMemedImage() -> UIImage {
-        // TODO: Hide toolbar and navbar
+        // Create renderer and image view to draw in, with original image size
+        let renderer = UIGraphicsImageRenderer(size: imagePickerView.intrinsicContentSize)
+        let imageView = CGRect(x: 0.0, y: 0.0,
+                               width: meme.imageWidth, height: meme.imageHeight)
         
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        // TODO: Show toolbar and navbar
+        // Create the meme image
+        let memedImage = renderer.image { (ctx) in
+            // Add the image itself first
+            imagePickerView.image!.draw(in: imageView)
+            // Get and update text attributes to size to full image
+            var attributes = memeTextDelegate.memeTextAttributes
+            let newSize = topTextField.font!.pointSize / meme.scale
+            attributes.updateValue(
+                UIFont(name: "HelveticaNeue-CondensedBlack", size: newSize)!,
+                forKey: NSAttributedString.Key.font)
+            // Add centering of text attribute and merge into `attributes`
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            attributes.merge([NSAttributedString.Key.paragraphStyle: paragraphStyle],
+                             uniquingKeysWith: { (current, _) in current })
+            // Add top and bottom text
+            let topText = topTextField.text! as NSString
+            topText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.1),
+                         withAttributes: attributes)
+            let bottomText = bottomTextField.text! as NSString
+            bottomText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.9 - newSize),
+                            withAttributes: attributes)
+        }
         
         return memedImage
     }
@@ -193,6 +223,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         let controller = UIActivityViewController(activityItems: [meme], applicationActivities: nil)
         present(controller, animated: true, completion: nil)
     }
+    
     @IBAction func cancelMeme(_ sender: Any) {
         // Set back to initial view
         imagePickerView.image = nil
