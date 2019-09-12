@@ -55,14 +55,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         activityButton.isEnabled = false
         cancelButton.isEnabled = false
         // Set up initial text fields
+        let attributes = getAttributes()
         topTextField.text = "TOP"
-        topTextField.textAlignment = .center
         topTextField.delegate = memeTextDelegate
-        topTextField.defaultTextAttributes = memeTextDelegate.memeTextAttributes
+        topTextField.defaultTextAttributes = attributes
         bottomTextField.text = "BOTTOM"
-        bottomTextField.textAlignment = .center
         bottomTextField.delegate = memeTextDelegate
-        bottomTextField.defaultTextAttributes = memeTextDelegate.memeTextAttributes
+        bottomTextField.defaultTextAttributes = attributes
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -96,6 +95,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Helper function to get and adjust initial text attributes
+    func getAttributes() -> [NSAttributedString.Key : Any] {
+        var attributes = memeTextDelegate.memeTextAttributes
+        // Add centering style
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributes.merge([NSAttributedString.Key.paragraphStyle: paragraphStyle],
+                         uniquingKeysWith: { (current, _) in current })
+        
+        return attributes
     }
     
     // MARK: Image Text helper functions
@@ -178,16 +189,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
             // Add the image itself first
             imagePickerView.image!.draw(in: imageView)
             // Get and update text attributes to size to full image
-            var attributes = memeTextDelegate.memeTextAttributes
+            var attributes = getAttributes()
             let newSize = topTextField.font!.pointSize / meme.scale
             attributes.updateValue(
                 UIFont(name: "HelveticaNeue-CondensedBlack", size: newSize)!,
                 forKey: NSAttributedString.Key.font)
-            // Add centering of text attribute and merge into `attributes`
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            attributes.merge([NSAttributedString.Key.paragraphStyle: paragraphStyle],
-                             uniquingKeysWith: { (current, _) in current })
             // Add top and bottom text
             let topText = topTextField.text! as NSString
             topText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.1),

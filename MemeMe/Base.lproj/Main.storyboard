@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kpc-Oa-0z5">
-                                <rect key="frame" x="171.5" y="84" width="32" height="17"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g1p-ec-kcx">
-                                <rect key="frame" x="155.5" y="586" width="64" height="17"/>
+                                <rect key="frame" x="0.0" y="586" width="375" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -54,16 +54,20 @@
                         <constraints>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="42H-15-Xxw"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="FAB-PJ-Amj"/>
+                            <constraint firstItem="g1p-ec-kcx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gdd-ff-5Wi"/>
                             <constraint firstItem="kpc-Oa-0z5" firstAttribute="top" secondItem="2xZ-dF-han" secondAttribute="top" constant="20" id="SVM-pX-5Y6"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UYB-mF-lco"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kpc-Oa-0z5" secondAttribute="trailing" id="YYp-uv-o8o"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YfK-mx-Zbi"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cWE-uK-6Ad"/>
                             <constraint firstItem="g1p-ec-kcx" firstAttribute="centerX" secondItem="2xZ-dF-han" secondAttribute="centerX" id="d1m-gt-x17"/>
                             <constraint firstItem="kpc-Oa-0z5" firstAttribute="centerX" secondItem="2xZ-dF-han" secondAttribute="centerX" id="guf-re-xcM"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="bottom" secondItem="g1p-ec-kcx" secondAttribute="bottom" constant="20" id="iE1-gr-XiK"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mEW-GK-l1y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g1p-ec-kcx" secondAttribute="trailing" id="mYM-0y-Sxc"/>
                             <constraint firstItem="ISt-4y-goY" firstAttribute="top" secondItem="2xZ-dF-han" secondAttribute="bottom" id="mmh-ch-036"/>
                             <constraint firstItem="2xZ-dF-han" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="or7-OG-ffF"/>
+                            <constraint firstItem="kpc-Oa-0z5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uCd-8a-LzX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
