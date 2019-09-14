@@ -12,10 +12,10 @@ import UIKit
 class MemeTextFieldDelegate : NSObject, UITextFieldDelegate {
     // Set attributes of text
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth: -3.0
+        .strokeColor: UIColor.black,
+        .foregroundColor: UIColor.white,
+        .font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        .strokeWidth: -3.0
     ]
     
     // Clear text field if only default text included

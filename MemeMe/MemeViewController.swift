@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate,
+class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
                       UINavigationControllerDelegate {
 
     // MARK: Constants
@@ -55,13 +55,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         activityButton.isEnabled = false
         cancelButton.isEnabled = false
         // Set up initial text fields
-        let attributes = getAttributes()
-        topTextField.text = "TOP"
-        topTextField.delegate = memeTextDelegate
-        topTextField.defaultTextAttributes = attributes
-        bottomTextField.text = "BOTTOM"
-        bottomTextField.delegate = memeTextDelegate
-        bottomTextField.defaultTextAttributes = attributes
+        setInitialText(textField: topTextField, "TOP")
+        setInitialText(textField: bottomTextField, "BOTTOM")
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -97,7 +92,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Helper function to get and adjust initial text attributes
+    // MARK: Helper functions to get and adjust initial text attributes
     func getAttributes() -> [NSAttributedString.Key : Any] {
         var attributes = memeTextDelegate.memeTextAttributes
         // Add centering style
@@ -107,6 +102,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
                          uniquingKeysWith: { (current, _) in current })
         
         return attributes
+    }
+    
+    func setInitialText(textField: UITextField, _ initText: String) {
+        let attributes = getAttributes()
+        textField.text = initText
+        textField.delegate = memeTextDelegate
+        textField.defaultTextAttributes = attributes
     }
     
     // MARK: Image Text helper functions
@@ -215,20 +217,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // MARK: Actions
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        pickAnImage(.photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        pickAnImage(.camera)
+    }
+    
+    func pickAnImage(_ type: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = .camera
+        pickerController.sourceType = type
         present(pickerController, animated: true, completion: nil)
     }
     
-    @IBAction func shareOrSaveMeme(_ sender: Any) {
+    @IBAction func shareAndSaveMeme(_ sender: Any) {
         let memedImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage],
                                                   applicationActivities: nil)
