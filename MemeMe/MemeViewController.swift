@@ -181,29 +181,32 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: Functions to store memes
     func generateMemedImage() -> UIImage {
-        // Create renderer and image view to draw in, with original image size
-        let renderer = UIGraphicsImageRenderer(size: imagePickerView.intrinsicContentSize)
+        // Create graphics context and image view to draw in, with original image size
+        UIGraphicsBeginImageContext(imagePickerView.intrinsicContentSize)
         let imageView = CGRect(x: 0.0, y: 0.0,
                                width: meme.imageWidth, height: meme.imageHeight)
         
-        // Create the meme image
-        let memedImage = renderer.image { (ctx) in
-            // Add the image itself first
-            imagePickerView.image!.draw(in: imageView)
-            // Get and update text attributes to size to full image
-            var attributes = getAttributes()
-            let newSize = topTextField.font!.pointSize / meme.scale
-            attributes.updateValue(
-                UIFont(name: "HelveticaNeue-CondensedBlack", size: newSize)!,
-                forKey: NSAttributedString.Key.font)
-            // Add top and bottom text
-            let topText = topTextField.text! as NSString
-            topText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.1),
-                         withAttributes: attributes)
-            let bottomText = bottomTextField.text! as NSString
-            bottomText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.9 - newSize),
-                            withAttributes: attributes)
-        }
+        // Add the image itself first
+        imagePickerView.image!.draw(in: imageView)
+        
+        // Get and update text attributes to size to full image
+        var attributes = getAttributes()
+        let newSize = topTextField.font!.pointSize / meme.scale
+        attributes.updateValue(
+            UIFont(name: "HelveticaNeue-CondensedBlack", size: newSize)!,
+            forKey: NSAttributedString.Key.font)
+        
+        // Add top and bottom text
+        let topText = topTextField.text! as NSString
+        topText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.1),
+                     withAttributes: attributes)
+        let bottomText = bottomTextField.text! as NSString
+        bottomText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.9 - newSize),
+                        withAttributes: attributes)
+        
+        // Create the meme image & end the graphics context
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
         
         return memedImage
     }
