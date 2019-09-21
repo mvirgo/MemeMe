@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeViewController.swift
 //  MemeMe
 //
 //  Created by Michael Virgo on 9/8/19.
@@ -48,9 +48,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         // Enable camera button only if there is a camera available
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        // Disable the activity & cancel buttons until an image is selected
+        // Disable the activity button until an image is selected
         activityButton.isEnabled = false
-        cancelButton.isEnabled = false
         // Set up initial text fields
         setInitialText(textField: topTextField, "TOP")
         setInitialText(textField: bottomTextField, "BOTTOM")
@@ -78,9 +77,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
             // Set the image text
             setImageText(image)
             // Enable the activity button for sharing/saving
-            //   as well as the cancel button
             activityButton.isEnabled = true
-            cancelButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -218,6 +215,13 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
     }
+    
+    // MARK: Function to return to root page
+    func returnToInitialView() {
+        if let navigationController = navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+    }
 
     // MARK: Actions
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
@@ -249,14 +253,14 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         controller.completionWithItemsHandler = {(activity, success, items, error) in
             if success {
                 self.save()
+                self.returnToInitialView()
             }
         }
     }
     
     @IBAction func cancelMeme(_ sender: Any) {
-        // Set back to initial view
-        imagePickerView.image = nil
-        viewDidLoad()
+        // Set back to root view
+        self.returnToInitialView()
     }
 }
 

@@ -14,6 +14,12 @@ class SharedMemeCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        // Make sure collection data is reloaded appropriately
+        self.collectionView.reloadData()
+    }
+    
     // MARK: Get memes from App Delegate
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate

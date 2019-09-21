@@ -41,11 +41,6 @@
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="uFq-m7-caJ"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Back" id="DYX-xm-gWG">
-                                        <connections>
-                                            <segue destination="ZdC-uf-WYR" kind="show" id="uvM-Kq-yjl"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eud-C0-ijh"/>
                                     <barButtonItem systemItem="camera" id="As4-dK-jxv">
                                         <connections>
@@ -102,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071.2" y="132.68365817091455"/>
+            <point key="canvasLocation" x="-1713" y="534"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="x0V-HE-6ft">
@@ -195,7 +190,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxj-eU-I8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1708" y="447.52623688155927"/>
+            <point key="canvasLocation" x="-1713" y="-182"/>
         </scene>
         <!--SharedMemeTableView-->
         <scene sceneID="gYx-h9-gbp">
@@ -233,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPX-aV-do2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1708" y="-293"/>
+            <point key="canvasLocation" x="-1713" y="-923"/>
         </scene>
         <!--SharedMemeDetailView-->
         <scene sceneID="103-15-r2Y">
@@ -262,28 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRE-UG-hLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-864.79999999999995" y="-298.2008995502249"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="bGN-Nb-SaT">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="332-io-0m7" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Khf-YF-hBv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cQ6-wy-MhG"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2rB-r9-C4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="132" y="132.68365817091455"/>
+            <point key="canvasLocation" x="-868" y="-535"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="RYJ-IQ-3jZ"/>
-    </inferredMetricsTieBreakers>
 </document>
