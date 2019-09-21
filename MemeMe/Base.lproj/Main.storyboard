@@ -145,10 +145,10 @@
             </objects>
             <point key="canvasLocation" x="-2634" y="90"/>
         </scene>
-        <!--Collection-->
+        <!--SharedMemeCollectionView-->
         <scene sceneID="r1v-4o-Rhd">
             <objects>
-                <collectionViewController id="wcP-cY-PVz" customClass="SharedMemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="SharedMemeCollectionView" id="wcP-cY-PVz" customClass="SharedMemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YUV-kh-rMz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="-1708" y="447.52623688155927"/>
         </scene>
-        <!--Table-->
+        <!--SharedMemeTableView-->
         <scene sceneID="gYx-h9-gbp">
             <objects>
-                <tableViewController id="cl9-NJ-lub" customClass="SharedMemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="SharedMemeTableView" id="cl9-NJ-lub" customClass="SharedMemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="23q-9M-mYf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,6 +235,35 @@
             </objects>
             <point key="canvasLocation" x="-1708" y="-293"/>
         </scene>
+        <!--SharedMemeDetailView-->
+        <scene sceneID="103-15-r2Y">
+            <objects>
+                <viewController storyboardIdentifier="SharedMemeDetailView" title="SharedMemeDetailView" id="sop-YZ-sa0" customClass="SharedMemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xdf-Tt-DHY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7n-oj-iOp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j7n-oj-iOp" firstAttribute="top" secondItem="4Pm-Fc-HEb" secondAttribute="top" id="262-Xq-O0b"/>
+                            <constraint firstItem="j7n-oj-iOp" firstAttribute="bottom" secondItem="4Pm-Fc-HEb" secondAttribute="bottom" id="bck-4c-JLJ"/>
+                            <constraint firstItem="j7n-oj-iOp" firstAttribute="leading" secondItem="4Pm-Fc-HEb" secondAttribute="leading" id="mXJ-eE-J9r"/>
+                            <constraint firstItem="j7n-oj-iOp" firstAttribute="trailing" secondItem="4Pm-Fc-HEb" secondAttribute="trailing" id="pHY-4w-yel"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Pm-Fc-HEb"/>
+                    </view>
+                    <connections>
+                        <outlet property="memeView" destination="j7n-oj-iOp" id="O7f-sk-sPv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qRE-UG-hLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-864.79999999999995" y="-298.2008995502249"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bGN-Nb-SaT">
             <objects>
@@ -255,6 +284,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cQ6-wy-MhG"/>
+        <segue reference="RYJ-IQ-3jZ"/>
     </inferredMetricsTieBreakers>
 </document>

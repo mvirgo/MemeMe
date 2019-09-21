@@ -36,8 +36,15 @@ class SharedMemeCollectionViewController: UICollectionViewController {
         return cell
     }
 
-    //TODO: Implement didSelectItemAt
-    //override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //return
-    //}
+    // MARK: Show Meme detail view
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Grab the DetailVC from Storyboard
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SharedMemeDetailView") as! SharedMemeDetailViewController
+        
+        // Populate view controller with data from the selected item
+        detailController.meme = memes[(indexPath as NSIndexPath).row]
+        
+        // Present the view controller using navigation
+        navigationController!.pushViewController(detailController, animated: true)
+    }
 }

@@ -36,8 +36,15 @@ class SharedMemeTableViewController: UITableViewController {
         return cell
     }
     
-    // TODO: Implement didSelectRowAt
-    //override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //return
-    //}
+    // MARK: Show Meme detail view
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Grab the DetailVC from Storyboard
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SharedMemeDetailView") as! SharedMemeDetailViewController
+        
+        // Populate view controller with data from the selected item
+        detailController.meme = memes[(indexPath as NSIndexPath).row]
+        
+        // Present the view controller using navigation
+        navigationController!.pushViewController(detailController, animated: true)
+    }
 }
