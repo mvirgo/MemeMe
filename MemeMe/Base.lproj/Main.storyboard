@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="332-io-0m7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZdC-uf-WYR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,6 +39,11 @@
                                     <barButtonItem title="Select Image" id="xhf-z4-qMI">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="uFq-m7-caJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Back" id="DYX-xm-gWG">
+                                        <connections>
+                                            <segue destination="ZdC-uf-WYR" kind="show" id="uvM-Kq-yjl"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eud-C0-ijh"/>
@@ -120,7 +125,11 @@
             <objects>
                 <tabBarController id="WXo-qQ-5Gj" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="FkC-tQ-YMx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hnx-1u-ZyJ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hnx-1u-ZyJ">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="RYJ-IQ-3jZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T9b-dn-32D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -174,18 +183,27 @@
         <!--Table-->
         <scene sceneID="gYx-h9-gbp">
             <objects>
-                <tableViewController id="cl9-NJ-lub" sceneMemberID="viewController">
+                <tableViewController id="cl9-NJ-lub" customClass="SharedMemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="23q-9M-mYf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xOZ-lx-Fzd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeCell" textLabel="n3I-l5-Rza" style="IBUITableViewCellStyleDefault" id="xOZ-lx-Fzd">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xOZ-lx-Fzd" id="d9P-gK-joi">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n3I-l5-Rza">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -219,4 +237,7 @@
             <point key="canvasLocation" x="132" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="RYJ-IQ-3jZ"/>
+    </inferredMetricsTieBreakers>
 </document>
