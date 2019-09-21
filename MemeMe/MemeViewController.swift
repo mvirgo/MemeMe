@@ -26,17 +26,14 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var activityButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    // MARK: Meme struct to hold information
-    struct Meme {
-        var topText: String = ""
-        var bottomText: String = ""
-        var originalImage: UIImage?
-        var memedImage: UIImage?
-        var imageHeight: CGFloat = 0.0
-        var imageWidth: CGFloat = 0.0
-        var scale: CGFloat = 0.0
-    }
-    var meme = Meme()
+    // MARK: Meme to hold current information
+    var topText: String = ""
+    var bottomText: String = ""
+    var originalImage: UIImage!
+    var memedImage: UIImage!
+    var imageHeight: CGFloat = 0.0
+    var imageWidth: CGFloat = 0.0
+    var scale: CGFloat = 0.0
     
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -116,21 +113,21 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // Get the image dimensions and scale
         let imageViewHeight = imagePickerView.bounds.height
         let imageViewWidth = imagePickerView.bounds.width
-        meme.imageHeight = imagePickerView.intrinsicContentSize.height
-        meme.imageWidth = imagePickerView.intrinsicContentSize.width
+        imageHeight = imagePickerView.intrinsicContentSize.height
+        imageWidth = imagePickerView.intrinsicContentSize.width
         // Calculate image scale based on device orientation
         if UIDevice.current.orientation.isPortrait {
-            meme.scale = imageViewWidth / meme.imageWidth
+            scale = imageViewWidth / imageWidth
         } else {
-            meme.scale = imageViewHeight / meme.imageHeight
+            scale = imageViewHeight / imageHeight
         }
         let middle = imageViewHeight / 2
         // Move the meme text onto the image
         // Multiply by textPositionScale to move slightly into image
         topTextConstraint.constant =
-            middle - (meme.scale * (meme.imageHeight / 2) * textPositionScale)
+            middle - (scale * (imageHeight / 2) * textPositionScale)
         bottomTextConstraint.constant =
-            middle - (meme.scale * (meme.imageHeight / 2) * textPositionScale)
+            middle - (scale * (imageHeight / 2) * textPositionScale)
     }
     
     // MARK: Keyboard functions to avoid overlaying onto text
@@ -184,24 +181,24 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // Create graphics context and image view to draw in, with original image size
         UIGraphicsBeginImageContext(imagePickerView.intrinsicContentSize)
         let imageView = CGRect(x: 0.0, y: 0.0,
-                               width: meme.imageWidth, height: meme.imageHeight)
+                               width: imageWidth, height: imageHeight)
         
         // Add the image itself first
         imagePickerView.image!.draw(in: imageView)
         
         // Get and update text attributes to size to full image
         var attributes = getAttributes()
-        let newSize = topTextField.font!.pointSize / meme.scale
+        let newSize = topTextField.font!.pointSize / scale
         attributes.updateValue(
             UIFont(name: "HelveticaNeue-CondensedBlack", size: newSize)!,
             forKey: NSAttributedString.Key.font)
         
         // Add top and bottom text
         let topText = topTextField.text! as NSString
-        topText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.1),
+        topText.draw(in: imageView.offsetBy(dx: 0, dy: imageHeight * 0.1),
                      withAttributes: attributes)
         let bottomText = bottomTextField.text! as NSString
-        bottomText.draw(in: imageView.offsetBy(dx: 0, dy: meme.imageHeight * 0.9 - newSize),
+        bottomText.draw(in: imageView.offsetBy(dx: 0, dy: imageHeight * 0.9 - newSize),
                         withAttributes: attributes)
         
         // Create the meme image & end the graphics context
@@ -213,9 +210,13 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func save() {
         // Store meme information
-        meme.topText = topTextField.text!
-        meme.bottomText = bottomTextField.text!
-        meme.originalImage = imagePickerView.image!
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!,
+                        originalImage: imagePickerView.image!, memedImage: memedImage)
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
 
     // MARK: Actions
@@ -235,7 +236,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func shareAndSaveMeme(_ sender: Any) {
-        let memedImage = generateMemedImage()
+        memedImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memedImage],
                                                   applicationActivities: nil)
         // Handle iPads
@@ -247,7 +248,6 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // Save the image if selected
         controller.completionWithItemsHandler = {(activity, success, items, error) in
             if success {
-                self.meme.memedImage = memedImage
                 self.save()
             }
         }
