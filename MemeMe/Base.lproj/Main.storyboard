@@ -186,7 +186,7 @@
                             <outlet property="delegate" destination="wcP-cY-PVz" id="BDn-sN-tuD"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Collection" id="qct-YT-7qO"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="collection_view" selectedImage="collection_view" id="qct-YT-7qO"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxj-eU-I8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -224,7 +224,7 @@
                             <outlet property="delegate" destination="cl9-NJ-lub" id="NZB-We-uIy"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Table" id="2mA-LP-TQv"/>
+                    <tabBarItem key="tabBarItem" title="Table" image="table_view" selectedImage="table_view" id="2mA-LP-TQv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPX-aV-do2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,4 +277,8 @@
             <point key="canvasLocation" x="-868" y="-535.68215892053979"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection_view" width="30" height="30"/>
+        <image name="table_view" width="30" height="30"/>
+    </resources>
 </document>
