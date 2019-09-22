@@ -53,14 +53,8 @@ class SharedMemeCollectionViewController: UICollectionViewController {
 
     // MARK: Show Meme detail view
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Grab the DetailVC from Storyboard
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "SharedMemeDetailView") as! SharedMemeDetailViewController
-        
-        // Populate view controller with data from the selected item
-        detailController.meme = memes[(indexPath as NSIndexPath).row]
-        
-        // Present the view controller using navigation
-        navigationController!.pushViewController(detailController, animated: true)
+        Helper.showMemeDetail(self.storyboard!, navigationController!,
+                              memes, indexPath)
     }
     
     // MARK: Handle device rotations to re-calculate flow layout
