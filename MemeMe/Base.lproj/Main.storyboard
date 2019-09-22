@@ -164,17 +164,17 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ybq-wf-W5Z">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="90"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="120" id="Vxx-J7-7Kz"/>
-                                                <constraint firstAttribute="height" constant="90" id="vrN-R3-JVb"/>
-                                            </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="Ybq-wf-W5Z" firstAttribute="top" secondItem="z1h-WE-SMk" secondAttribute="top" id="0Iq-j5-5OG"/>
                                     <constraint firstAttribute="trailing" secondItem="Ybq-wf-W5Z" secondAttribute="trailing" id="1rF-JF-L3h"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ybq-wf-W5Z" secondAttribute="trailing" id="HCG-ZL-IQI"/>
+                                    <constraint firstItem="Ybq-wf-W5Z" firstAttribute="leading" secondItem="z1h-WE-SMk" secondAttribute="leading" id="Ls8-Zd-N6W"/>
                                     <constraint firstItem="Ybq-wf-W5Z" firstAttribute="top" secondItem="z1h-WE-SMk" secondAttribute="top" id="Yw7-V7-pdp"/>
                                     <constraint firstItem="Ybq-wf-W5Z" firstAttribute="leading" secondItem="z1h-WE-SMk" secondAttribute="leading" id="wKT-yM-Vhz"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ybq-wf-W5Z" secondAttribute="bottom" id="yQP-rR-sXZ"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="memeImage" destination="Ybq-wf-W5Z" id="Y2b-PE-kSC"/>
@@ -186,7 +186,11 @@
                             <outlet property="delegate" destination="wcP-cY-PVz" id="BDn-sN-tuD"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Collection" image="collection_view" selectedImage="collection_view" id="qct-YT-7qO"/>
+                    <connections>
+                        <outlet property="flowLayout" destination="k9u-qg-gS8" id="TZP-Fx-DgH"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxj-eU-I8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
