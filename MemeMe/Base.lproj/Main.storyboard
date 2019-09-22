@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MemeMe-->
+        <!--EditMemeController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MemeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditMemeController" title="EditMemeController" id="BYZ-38-t0r" customClass="MemeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,26 +238,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7n-oj-iOp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxW-wz-Y7j">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="NCs-K5-yB4">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="tQb-L5-ARX">
+                                            <connections>
+                                                <action selector="editMeme:" destination="sop-YZ-sa0" id="wU0-m3-Dyo"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7n-oj-iOp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="j7n-oj-iOp" firstAttribute="top" secondItem="4Pm-Fc-HEb" secondAttribute="top" id="262-Xq-O0b"/>
-                            <constraint firstItem="j7n-oj-iOp" firstAttribute="bottom" secondItem="4Pm-Fc-HEb" secondAttribute="bottom" id="bck-4c-JLJ"/>
+                            <constraint firstItem="fxW-wz-Y7j" firstAttribute="bottom" secondItem="4Pm-Fc-HEb" secondAttribute="bottom" id="5u3-f6-S2k"/>
+                            <constraint firstItem="fxW-wz-Y7j" firstAttribute="leading" secondItem="4Pm-Fc-HEb" secondAttribute="leading" id="Spb-5F-JHb"/>
+                            <constraint firstItem="fxW-wz-Y7j" firstAttribute="trailing" secondItem="4Pm-Fc-HEb" secondAttribute="trailing" id="Yph-Rx-Vfi"/>
+                            <constraint firstItem="j7n-oj-iOp" firstAttribute="bottom" secondItem="fxW-wz-Y7j" secondAttribute="top" id="bck-4c-JLJ"/>
                             <constraint firstItem="j7n-oj-iOp" firstAttribute="leading" secondItem="4Pm-Fc-HEb" secondAttribute="leading" id="mXJ-eE-J9r"/>
                             <constraint firstItem="j7n-oj-iOp" firstAttribute="trailing" secondItem="4Pm-Fc-HEb" secondAttribute="trailing" id="pHY-4w-yel"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Pm-Fc-HEb"/>
                     </view>
                     <connections>
+                        <outlet property="editToolbar" destination="fxW-wz-Y7j" id="kbu-HF-INN"/>
                         <outlet property="memeView" destination="j7n-oj-iOp" id="O7f-sk-sPv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRE-UG-hLe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-868" y="-535"/>
+            <point key="canvasLocation" x="-868" y="-535.68215892053979"/>
         </scene>
     </scenes>
 </document>

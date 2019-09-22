@@ -26,14 +26,17 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var activityButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    // MARK: Meme to hold current information
-    var topText: String = ""
-    var bottomText: String = ""
-    var originalImage: UIImage!
-    var memedImage: UIImage!
+    // MARK: Hold current image information
     var imageHeight: CGFloat = 0.0
     var imageWidth: CGFloat = 0.0
     var scale: CGFloat = 0.0
+    var memedImage: UIImage!
+    
+    // MARK: Hold information from existing meme for editing
+    var topText: String!
+    var bottomText: String!
+    var originalImage: UIImage!
+    var existingMeme = false
     
     // MARK: Text Field Delegate objects
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -48,17 +51,27 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         // Enable camera button only if there is a camera available
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        // Disable the activity button until an image is selected
-        activityButton.isEnabled = false
-        // Set up initial text fields
-        setInitialText(textField: topTextField, "TOP")
-        setInitialText(textField: bottomTextField, "BOTTOM")
+        if existingMeme {
+            // Set up text fields
+            setInitialText(textField: topTextField, topText)
+            setInitialText(textField: bottomTextField, bottomText)
+            // Set image
+            imagePickerView.image = originalImage
+            // Move text to correct place
+            setImageText()
+        } else {
+            // Disable the activity button until an image is selected
+            activityButton.isEnabled = false
+            // Set up initial text fields
+            setInitialText(textField: topTextField, "TOP")
+            setInitialText(textField: bottomTextField, "BOTTOM")
+        }
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         // If there's an image, calculate and set the text
-        if let image = imagePickerView.image {
-            setImageText(image)
+        if let _ = imagePickerView.image {
+            setImageText()
         }
     }
     
@@ -75,7 +88,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
             // Set the image into the view
             imagePickerView.image = image
             // Set the image text
-            setImageText(image)
+            setImageText()
             // Enable the activity button for sharing/saving
             activityButton.isEnabled = true
         }
@@ -106,7 +119,7 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // MARK: Image Text helper functions
-    func setImageText(_ image: UIImage) {
+    func setImageText() {
         // Get the image dimensions and scale
         let imageViewHeight = imagePickerView.bounds.height
         let imageViewWidth = imagePickerView.bounds.width
@@ -218,6 +231,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: Function to return to root page
     func returnToInitialView() {
+        self.existingMeme = false // reset flag
+        
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         }

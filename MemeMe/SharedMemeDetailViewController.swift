@@ -17,6 +17,7 @@ class SharedMemeDetailViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet weak var memeView: UIImageView!
+    @IBOutlet weak var editToolbar: UINavigationBar!
     
     // MARK: Life Cycle
     
@@ -24,5 +25,21 @@ class SharedMemeDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         self.memeView!.image = meme.memedImage
     }
-
+    
+    // MARK: Actions
+    
+    @IBAction func editMeme(_ sender: Any) {
+        // Get the Meme Editor controller
+        let editController = self.storyboard!.instantiateViewController(withIdentifier: "EditMemeController") as! MemeViewController
+        
+        // Load the current meme into the Meme Editor
+        editController.topText = meme.topText
+        editController.bottomText = meme.bottomText
+        editController.originalImage = meme.originalImage
+        editController.existingMeme = true
+        
+        // Present the view controller using navigation
+        navigationController!.pushViewController(editController, animated: true)
+    }
+    
 }
