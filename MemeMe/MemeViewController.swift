@@ -57,14 +57,20 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
             setInitialText(textField: bottomTextField, bottomText)
             // Set image
             imagePickerView.image = originalImage
-            // Move text to correct place
-            setImageText()
         } else {
             // Disable the activity button until an image is selected
             activityButton.isEnabled = false
             // Set up initial text fields
             setInitialText(textField: topTextField, "TOP")
             setInitialText(textField: bottomTextField, "BOTTOM")
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if existingMeme {
+            // Move text to correct place
+            setImageText()
         }
     }
     
@@ -91,6 +97,8 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate,
             setImageText()
             // Enable the activity button for sharing/saving
             activityButton.isEnabled = true
+            // Set existingMeme flag to false in case one previously loaded
+            existingMeme = false
         }
         dismiss(animated: true, completion: nil)
     }
