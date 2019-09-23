@@ -10,12 +10,8 @@ import UIKit
 
 class SharedMemeTableViewController: UITableViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         // Make sure table data is reloaded appropriately
         self.tableView.reloadData()
     }

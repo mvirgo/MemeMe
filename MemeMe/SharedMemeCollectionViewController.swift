@@ -64,13 +64,8 @@ class SharedMemeCollectionViewController: UICollectionViewController {
     
     // MARK: Function to handle flow layout
     func setFlowLayout() {
-        let space:CGFloat = 3.0
-        let divisor: CGFloat
-        if UIDevice.current.orientation.isPortrait {
-            divisor = 2.0
-        } else {
-            divisor = 3.0
-        }
+        let space: CGFloat = 3.0
+        let divisor: CGFloat = UIDevice.current.orientation.isPortrait ? 2.0 : 3.0
         let dimension = (view.safeAreaLayoutGuide.layoutFrame.width - (2 * space)) / divisor
         
         flowLayout.minimumInteritemSpacing = space
